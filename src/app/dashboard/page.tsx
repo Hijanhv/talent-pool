@@ -103,7 +103,7 @@ export default function DashboardPage() {
           ) : myOrders && myOrders.length > 0 ? (
             <div className="space-y-4">
               {myOrders.map((order) => (
-                <OrderCard key={order.id} order={order} />
+                <OrderCard key={order.id} order={order} type="buying" />
               ))}
             </div>
           ) : (
