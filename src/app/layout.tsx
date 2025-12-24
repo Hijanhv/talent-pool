@@ -6,23 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'TalentPool - Zero-Fee Freelance Marketplace on Solana',
-  description:
-    'Earn and hire freelancers instantly with zero fees on Solana blockchain. Get paid in SOL, build your reputation with NFT badges.',
-  keywords: [
-    'freelance',
-    'gig economy',
-    'Solana',
-    'Web3',
-    'blockchain',
-    'zero fees',
-    'instant payments',
-  ],
-  openGraph: {
-    title: 'TalentPool - Zero-Fee Freelance Marketplace',
-    description: 'Earn and hire freelancers instantly on Solana with zero fees',
-    type: 'website',
-  },
+  title: 'TalentPool - Decentralized Freelance & Events Platform',
+  description: 'Zero-fee freelance marketplace and event management on Solana with NFT tickets and badges',
 };
 
 export default function RootLayout({
@@ -32,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <link rel="preconnect" href="https://api.devnet.solana.com" />
+      </head>
+      <body className={inter.className} suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>
