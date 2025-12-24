@@ -96,7 +96,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           success: false,
           error: {
             code: 'VALIDATION_ERROR',
-            message: error.errors[0]?.message || 'Validation failed',
+            message: error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', '),
+            details: error.errors,
           },
           timestamp: new Date().toISOString(),
         },
