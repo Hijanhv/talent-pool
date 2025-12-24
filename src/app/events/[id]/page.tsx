@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEventDetail, useRegisterEvent, useDeleteEvent } from '@/hooks/useEvents';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { Calendar, MapPin, Users, Zap, Share2, Edit2, Trash2, ArrowLeft, Check } from 'lucide-react';
+import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { Calendar, MapPin, Users, Zap, Share2, Edit2, Trash2, ArrowLeft, Check, Award } from 'lucide-react';
+import axios from 'axios';
 
 type PageProps = {
   params: { id: string };
@@ -14,7 +15,8 @@ type PageProps = {
 
 export default function EventDetailPage({ params }: PageProps) {
   const router = useRouter();
-  const { publicKey } = useWallet();
+  const { publicKey, signTransaction } = useWallet();
+  const { connection } = useConnection();
   const eventId = params.id;
 
   const { data: event, isLoading, error } = useEventDetail(eventId, true);
@@ -23,6 +25,8 @@ export default function EventDetailPage({ params }: PageProps) {
 
   const [hasRegistered, setHasRegistered] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [mintingNFT, setMintingNFT] = useState(false);
+  const [nftMinted, setNftMinted] = useState(false);
 
   if (isLoading) {
     return (
@@ -76,6 +80,40 @@ export default function EventDetailPage({ params }: PageProps) {
       router.push('/events');
     } catch (error) {
       console.error('Delete failed:', error);
+    }
+  };
+
+  const handleMintNFT = async () => {
+    if (!publicKey || !signTransaction) {
+      alert('Please connect your wallet first');
+      return;
+    }
+
+    try {
+      setMintingNFT(true);
+      
+      // Call mint NFT API
+      const response = await axios.post(
+        `/api/events/${eventId}/mint-nft`,
+        {
+          attendeeWalletAddress: publicKey.toBase58(),
+        },
+        {
+          headers: {
+            'x-wallet-address': publicKey.toBase58(),
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setNftMinted(true);
+        alert(`NFT Minted Successfully! Mint Address: ${response.data.data.mint}`);
+      }
+    } catch (error: any) {
+      console.error('NFT Minting failed:', error);
+      alert(error.response?.data?.error?.message || 'Failed to mint NFT');
+    } finally {
+      setMintingNFT(false);
     }
   };
 
@@ -225,26 +263,54 @@ export default function EventDetailPage({ params }: PageProps) {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="bg-slate-800 rounded-lg shadow-lg p-6">
-              <div className="text-center mb-6">
-                <p className="text-slate-400 text-sm mb-2">Ticket Price</p>
-                <p className="text-4xl font-bold text-blue-400">{event.ticketPrice}</p>
-                <p className="text-slate-400 text-sm">SOL</p>
-              </div>
-
-              <div className="mb-6">
-                <div className="w-full bg-slate-700 rounded-full h-3 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${capacityPercentage}%` }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className={`h-full ${
+          <motio<>
+                  {hasRegistered ? (
+                    <>
+                      <motion.div
+                        initial={{ scale: 0.9 }}
+                        animate={{ scale: 1 }}
+                        className="w-full py-3 px-4 bg-neo-purple border-2 border-neo-black text-white font-bold uppercase rounded-none text-center flex items-center justify-center gap-2 shadow-brutal mb-3"
+                      >
+                        <Check size={20} />
+                        Registered
+                      </motion.div>
+                      
+                      {event.canMintNFT && !nftMinted && (
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={handleMintNFT}
+                          disabled={mintingNFT}
+                          className="w-full py-3 px-4 bg-neo-orange border-2 border-neo-black text-white font-bold uppercase rounded-none hover:bg-neo-red transition-colors shadow-brutal flex items-center justify-center gap-2"
+                        >
+                          <Award size={20} />
+                          {mintingNFT ? 'Minting NFT...' : 'Mint NFT Ticket'}
+                        </motion.button>
+                      )}
+                      
+                      {nftMinted && (
+                        <motion.div
+                          initial={{ scale: 0.9 }}
+                          animate={{ scale: 1 }}
+                          className="w-full py-3 px-4 bg-neo-pink border-2 border-neo-black text-white font-bold uppercase rounded-none text-center flex items-center justify-center gap-2 shadow-brutal"
+                        >
+                          <Award size={20} />
+                          NFT Minted!
+                        </motion.div>
+                      )}
+                    </>
+                  ) : (
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleRegister}
+                      disabled={spotsAvailable === 0 || registerMutation.isPending || !publicKey}
+                      className="w-full py-3 px-4 bg-neo-purple border-3 border-neo-black text-white font-bold uppercase rounded-none hover:bg-neo-red disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors shadow-brutal"
+                    >
+                      {!publicKey ? 'Connect Wallet' : spotsAvailable === 0 ? 'Event Full' : 'Register Now'}
+                    </motion.button>
+                  )}
+                </>   className={`h-full ${
                       capacityPercentage > 90
                         ? 'bg-red-500'
                         : capacityPercentage > 75

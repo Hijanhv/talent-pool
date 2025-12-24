@@ -230,3 +230,24 @@ export const eventAttendeesRelations = relations(eventAttendees, ({ one }: any) 
     references: [events.id],
   }),
 }));
+
+// Badges/Achievements Table
+export const badges = pgTable(
+  'badges',
+  {
+    id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
+    walletAddress: varchar('wallet_address', { length: 44 }).notNull(),
+    type: varchar('type', { length: 50 }).notNull(), // event_attendee, event_organizer, early_adopter, super_host, active_participant
+    name: varchar('name', { length: 100 }).notNull(),
+    description: text('description').notNull(),
+    imageUrl: varchar('image_url', { length: 500 }),
+    nftMintAddress: varchar('nft_mint_address', { length: 44 }),
+    metadata: text('metadata'), // JSON string
+    earnedAt: timestamp('earned_at').defaultNow(),
+  },
+  (table: any) => ({
+    walletIdx: index('badge_wallet_idx').on(table.walletAddress),
+    typeIdx: index('badge_type_idx_v2').on(table.type),
+  })
+);
+

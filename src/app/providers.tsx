@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ConnectionProvider,
@@ -14,21 +14,30 @@ import {
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
+import { clusterApiUrl } from '@solana/web3.js';
 
 const queryClient = new QueryClient();
-const endpoint = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.devnet.solana.com';
-
-const wallets = [
-  new PhantomWalletAdapter(),
-  new SolflareWalletAdapter(),
-  new SolongWalletAdapter(),
-];
 
 export function Providers({ children }: { children: ReactNode }) {
+  // Memoize endpoint and wallets to prevent re-renders
+  const endpoint = useMemo(
+    () => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
+    []
+  );
+
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+      new SolflareWalletAdapter(),
+      new SolongWalletAdapter(),
+    ],
+    []
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
+        <WalletProvider wallets={wallets} autoConnect={true}>
           <WalletModalProvider>
             <div className="flex flex-col min-h-screen">
               <Header />
