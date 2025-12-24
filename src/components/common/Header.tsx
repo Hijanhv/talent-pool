@@ -18,14 +18,23 @@ export function Header() {
             TalentPool
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-4">
+            <Link href="/gigs" className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
+              Marketplace
+            </Link>
             <Link href="/events" className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
               Events
             </Link>
             {publicKey && (
               <>
-                <Link href="/events/create" className="text-neo-black hover:bg-neo-orange hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
-                  Create Event
+                <Link href="/gigs/create" className="text-neo-black hover:bg-neo-orange hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
+                  Post Gig
+                </Link>
+                <Link href="/dashboard" className="text-neo-black hover:bg-neo-pink hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
+                  Dashboard
+                </Link>
+                <Link href="/profile" className="text-neo-black hover:bg-neo-red hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
+                  Profile
                 </Link>
               </>
             )}
@@ -44,13 +53,24 @@ export function Header() {
 
         {mobileMenuOpen && (
           <nav className="md:hidden mt-4 space-y-2 pb-4">
+            <Link href="/gigs" className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-2 border-neo-black">
+              Marketplace
+            </Link>
             <Link href="/events" className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-2 border-neo-black">
               Events
             </Link>
             {publicKey && (
-              <Link href="/events/create" className="block py-2 px-4 text-neo-black hover:bg-neo-orange hover:text-white font-bold border-2 border-neo-black">
-                Create Event
-              </Link>
+              <>
+                <Link href="/gigs/create" className="block py-2 px-4 text-neo-black hover:bg-neo-orange hover:text-white font-bold border-2 border-neo-black">
+                  Post Gig
+                </Link>
+                <Link href="/dashboard" className="block py-2 px-4 text-neo-black hover:bg-neo-pink hover:text-white font-bold border-2 border-neo-black">
+                  Dashboard
+                </Link>
+                <Link href="/profile" className="block py-2 px-4 text-neo-black hover:bg-neo-red hover:text-white font-bold border-2 border-neo-black">
+                  Profile
+                </Link>
+              </>
             )}
           </nav>
         )}
