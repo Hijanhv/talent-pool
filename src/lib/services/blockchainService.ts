@@ -1,6 +1,6 @@
 import { PublicKey, Connection } from '@solana/web3.js';
 
-const SOLANA_RPC = process.env.SOLANA_RPC_URL || 'https:
+const SOLANA_RPC = process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com';
 
 export class BlockchainService {
   private connection: Connection;
