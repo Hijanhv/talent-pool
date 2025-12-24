@@ -1,18 +1,24 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useState } from 'react';
-import { GigCard } from '@/components/GigCard';
-import { Gig, PaginatedResponse } from '@/types';
-import { motion } from 'framer-motion';
-import { Loader, Search } from 'lucide-react';
-import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState<string | null>(null);
-  const [search, setSearch] = useState('');
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/events');
+  }, [router]);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neo-pink via-neo-white to-neo-purple">
+      <div className="text-center">
+        <h1 className="text-4xl font-black text-neo-black uppercase mb-4">TalentPool</h1>
+        <p className="text-neo-black font-bold">Redirecting to Events...</p>
+      </div>
+    </div>
+  );
+}
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['gigs', page, category, search],
