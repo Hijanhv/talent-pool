@@ -1,6 +1,6 @@
 import Redis from 'ioredis';
 
-// Redis client for caching
+
 const redis = new Redis({
   host: process.env.REDIS_HOST || 'localhost',
   port: parseInt(process.env.REDIS_PORT || '6379', 10),
@@ -24,7 +24,7 @@ redis.on('connect', () => {
 
 export default redis;
 
-// Cache key generators
+
 export const CACHE_KEYS = {
   event: (eventId: string) => `event:${eventId}`,
   eventsList: (page: number, limit: number) => `events:list:${page}:${limit}`,
@@ -33,7 +33,7 @@ export const CACHE_KEYS = {
   eventStats: (eventId: string) => `event:${eventId}:stats`,
 } as const;
 
-// Cache utilities
+
 export const cache = {
   /**
    * Get a value from cache

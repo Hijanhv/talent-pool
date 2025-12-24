@@ -19,7 +19,7 @@ import { clusterApiUrl } from '@solana/web3.js';
 const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: ReactNode }) {
-  // Memoize endpoint and wallets to prevent re-renders
+  
   const endpoint = useMemo(
     () => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl('devnet'),
     []

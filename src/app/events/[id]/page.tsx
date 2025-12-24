@@ -92,7 +92,7 @@ export default function EventDetailPage({ params }: PageProps) {
     try {
       setMintingNFT(true);
       
-      // Call mint NFT API
+      
       const response = await axios.post(
         `/api/events/${eventId}/mint-nft`,
         {

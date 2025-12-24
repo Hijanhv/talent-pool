@@ -151,7 +151,7 @@ export const reviewsRelations = relations(reviews, ({ one }) => ({
   }),
 }));
 
-// Events Management Tables
+
 export const events = pgTable(
   'events',
   {
@@ -169,9 +169,9 @@ export const events = pgTable(
     ticketPrice: numeric('ticket_price', { precision: 18, scale: 8 }).notNull(),
     imageUrl: varchar('image_url', { length: 500 }),
     bannerUrl: varchar('banner_url', { length: 500 }),
-    status: varchar('status', { length: 20 }).default('draft').notNull(), // draft, published, ongoing, completed, cancelled
+    status: varchar('status', { length: 20 }).default('draft').notNull(), 
     canMintNFT: boolean('can_mint_nft').default(false).notNull(),
-    nftMetadata: text('nft_metadata'), // JSON string for NFT metadata
+    nftMetadata: text('nft_metadata'), 
     totalRevenue: numeric('total_revenue', { precision: 18, scale: 8 }).default('0').notNull(),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow().$onUpdate(() => new Date()),
@@ -194,7 +194,7 @@ export const eventAttendees = pgTable(
     nftTicketMintAddress: varchar('nft_ticket_mint_address', { length: 44 }),
     paymentTxHash: varchar('payment_tx_hash', { length: 88 }),
     ticketCheckInTime: timestamp('ticket_check_in_time'),
-    status: varchar('status', { length: 20 }).default('registered').notNull(), // registered, checked-in, no-show, cancelled
+    status: varchar('status', { length: 20 }).default('registered').notNull(), 
     createdAt: timestamp('created_at').defaultNow(),
   },
   (table: any) => ({
@@ -219,7 +219,7 @@ export const eventCategoriesEnum = [
   'other',
 ] as const;
 
-// Relations for Events
+
 export const eventsRelations = relations(events, ({ many }: any) => ({
   attendees: many(eventAttendees),
 }));
@@ -231,18 +231,18 @@ export const eventAttendeesRelations = relations(eventAttendees, ({ one }: any) 
   }),
 }));
 
-// Badges/Achievements Table
+
 export const badges = pgTable(
   'badges',
   {
     id: varchar('id', { length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
     walletAddress: varchar('wallet_address', { length: 44 }).notNull(),
-    type: varchar('type', { length: 50 }).notNull(), // event_attendee, event_organizer, early_adopter, super_host, active_participant
+    type: varchar('type', { length: 50 }).notNull(), 
     name: varchar('name', { length: 100 }).notNull(),
     description: text('description').notNull(),
     imageUrl: varchar('image_url', { length: 500 }),
     nftMintAddress: varchar('nft_mint_address', { length: 44 }),
-    metadata: text('metadata'), // JSON string
+    metadata: text('metadata'), 
     earnedAt: timestamp('earned_at').defaultNow(),
   },
   (table: any) => ({

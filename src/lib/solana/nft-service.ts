@@ -41,19 +41,19 @@ export const mintNFTTicket = async (
   const { connection, payer, owner, eventName: _eventName, eventId: _eventId, attendeeAddress: _attendeeAddress } = params;
 
   try {
-    // Create new mint account
+    
     const mint = web3.Keypair.generate();
     const tokenAccount = await getAssociatedTokenAddress(mint.publicKey, owner);
 
-    // Get recent blockhash
+    
     const { blockhash } = await connection.getLatestBlockhash();
 
-    // Create transaction
+    
     const transaction = new web3.Transaction();
     transaction.recentBlockhash = blockhash;
     transaction.feePayer = payer.publicKey;
 
-    // Create mint account instruction
+    
     transaction.add(
       web3.SystemProgram.createAccount({
         fromPubkey: payer.publicKey,
@@ -64,9 +64,9 @@ export const mintNFTTicket = async (
       }),
       createInitializeMintInstruction(
         mint.publicKey,
-        0, // decimals
-        owner, // mint authority
-        owner, // freeze authority
+        0, 
+        owner, 
+        owner, 
         TOKEN_PROGRAM_ID
       ),
       createAssociatedTokenAccountInstruction(
@@ -81,16 +81,16 @@ export const mintNFTTicket = async (
         mint.publicKey,
         tokenAccount,
         owner,
-        1, // amount (1 NFT)
+        1, 
         [],
         TOKEN_PROGRAM_ID
       )
     );
 
-    // Sign and send transaction
+    
     const signature = await connection.sendTransaction(transaction, [payer, mint]);
 
-    // Wait for confirmation
+    
     await connection.confirmTransaction({
       signature,
       blockhash,
@@ -117,7 +117,7 @@ export const getEventNFTMetadata = (eventName: string, eventId: string, attendee
     name: `${eventName} Ticket`,
     description: `Attendance certificate for ${eventName}`,
     symbol: 'TICKET',
-    uri: '', // Would point to external metadata JSON
+    uri: '', 
     attributes: [
       {
         trait_type: 'Event',
@@ -175,7 +175,7 @@ export const getWalletNFTs = async (
       .filter((account) => {
         const parsedData = account.account.data.parsed;
         const amount = parsedData?.info?.tokenAmount?.uiAmount;
-        return amount === 1; // NFTs have 1 token
+        return amount === 1; 
       })
       .map((account) => {
         const parsedData = account.account.data.parsed;
@@ -231,7 +231,7 @@ export const transferNFT = async (
     transaction.recentBlockhash = blockhash;
     transaction.feePayer = fromWallet.publicKey;
 
-    // Add instruction to transfer NFT
+    
     transaction.add(
       new web3.TransactionInstruction({
         keys: [
@@ -241,7 +241,7 @@ export const transferNFT = async (
           { pubkey: fromWallet.publicKey, isSigner: true, isWritable: false },
         ],
         programId: TOKEN_PROGRAM_ID,
-        data: Buffer.from([3, 1, 0, 0, 0, 0, 0, 0, 0]), // Transfer instruction with amount 1
+        data: Buffer.from([3, 1, 0, 0, 0, 0, 0, 0, 0]), 
       })
     );
 

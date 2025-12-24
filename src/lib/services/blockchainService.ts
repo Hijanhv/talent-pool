@@ -1,6 +1,6 @@
 import { PublicKey, Connection } from '@solana/web3.js';
 
-const SOLANA_RPC = process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com';
+const SOLANA_RPC = process.env.SOLANA_RPC_URL || 'https:
 
 export class BlockchainService {
   private connection: Connection;
@@ -33,7 +33,7 @@ export class BlockchainService {
 
   async getNFTsForWallet(walletAddress: string): Promise<any[]> {
     try {
-      const response = await fetch(`https://api.helius.xyz/v0/addresses/${walletAddress}/nfts?api-key=${process.env.HELIUS_API_KEY}`);
+      const response = await fetch(`https:
       const data = await response.json();
       return data.nfts || [];
     } catch (error) {

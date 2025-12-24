@@ -15,7 +15,7 @@ export async function GET(
   try {
     const eventId = params.id;
 
-    // Check for include query parameter (to include attendees)
+    
     const searchParams = request.nextUrl.searchParams;
     const includeAttendees = searchParams.get('includeAttendees') === 'true';
 
@@ -93,7 +93,7 @@ export async function PUT(
       );
     }
 
-    // Verify ownership
+    
     const event = await getEventById(eventId);
     if (!event) {
       return NextResponse.json(
@@ -188,7 +188,7 @@ export async function DELETE(
       );
     }
 
-    // Verify ownership
+    
     const event = await getEventById(eventId);
     if (!event) {
       return NextResponse.json(

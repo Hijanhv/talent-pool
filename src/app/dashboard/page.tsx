@@ -57,7 +57,7 @@ export default function DashboardPage() {
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-5xl font-black uppercase mb-8 text-neo-black">My Dashboard</h1>
 
-        {/* My Gigs Section */}
+        {}
         <section className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
@@ -89,7 +89,7 @@ export default function DashboardPage() {
           )}
         </section>
 
-        {/* My Orders Section */}
+        {}
         <section>
           <div className="flex items-center gap-3 mb-6">
             <ShoppingBag className="w-8 h-8 text-neo-orange" />

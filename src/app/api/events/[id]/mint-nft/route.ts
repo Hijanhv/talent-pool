@@ -30,7 +30,7 @@ export async function POST(
     const body = await request.json();
     const { attendeeAddress } = mintNFTSchema.parse(body);
 
-    // Verify event exists
+    
     const event = await getEventById(eventId);
     if (!event) {
       return NextResponse.json(
@@ -46,7 +46,7 @@ export async function POST(
       );
     }
 
-    // Verify NFT minting is enabled for this event
+    
     if (!event.canMintNFT) {
       return NextResponse.json(
         {
@@ -61,16 +61,16 @@ export async function POST(
       );
     }
 
-    // In a production system, you would:
-    // 1. Create a transaction with the attendee's wallet
-    // 2. Sign it with a server keypair or the attendee's keypair
-    // 3. Send it to Solana
-    //
-    // For this example, we'll demonstrate the structure:
+    
+    
+    
+    
+    
+    
 
-    // Note: This would require the server to have a keypair or
-    // the attendee to sign the transaction
-    // For now, we'll return a structure showing how this would work
+    
+    
+    
 
     const response: ApiResponse<{
       message: string;

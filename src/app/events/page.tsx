@@ -39,7 +39,7 @@ export default function EventsPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-neo-pink via-neo-white to-neo-purple">
-      {/* Header */}
+      {}
       <section className="bg-neo-orange border-b-4 border-neo-black sticky top-0 z-40 shadow-brutal-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between mb-6">
@@ -56,9 +56,9 @@ export default function EventsPage() {
             </Link>
           </div>
 
-          {/* Search and Filters */}
+          {}
           <div className="space-y-4">
-            {/* Search Bar */}
+            {}
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
               <input
@@ -73,9 +73,9 @@ export default function EventsPage() {
               />
             </div>
 
-            {/* Filter Controls */}
+            {}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Category Filter */}
+              {}
               <div>
                 <label className="block text-sm font-black text-neo-black mb-2 uppercase tracking-wide">Category</label>
                 <select
@@ -95,7 +95,7 @@ export default function EventsPage() {
                 </select>
               </div>
 
-              {/* Status Filter */}
+              {}
               <div>
                 <label className="block text-sm font-black text-neo-black mb-2 uppercase tracking-wide">Status</label>
                 <select
@@ -119,7 +119,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Content */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
@@ -137,7 +137,7 @@ export default function EventsPage() {
           </div>
         ) : data && data.data.length > 0 ? (
           <>
-            {/* Events Grid */}
+            {}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -156,7 +156,7 @@ export default function EventsPage() {
               ))}
             </motion.div>
 
-            {/* Pagination */}
+            {}
             {data.pagination.totalPages > 1 && (
               <div className="flex items-center justify-between">
                 <p className="text-sm text-slate-400">

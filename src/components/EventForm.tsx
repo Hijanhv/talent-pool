@@ -147,7 +147,7 @@ export const EventForm: React.FC<EventFormProps> = ({ onSubmit, initialData, isL
           <input
             type="text"
             {...register('location')}
-            placeholder="https://zoom.us/j/... or link to your virtual venue"
+            placeholder="https:
             className="neo-input w-full bg-neo-white text-neo-black placeholder-gray-500"
           />
           {errors.location && <p className="text-neo-red text-sm mt-2 font-bold">{errors.location.message}</p>}
@@ -212,7 +212,7 @@ export const EventForm: React.FC<EventFormProps> = ({ onSubmit, initialData, isL
           <input
             type="url"
             {...register('imageUrl')}
-            placeholder="https://example.com/image.jpg"
+            placeholder="https:
             className="neo-input w-full bg-neo-white text-neo-black placeholder-gray-500"
           />
           {errors.imageUrl && <p className="text-neo-red text-sm mt-2 font-bold">{errors.imageUrl.message}</p>}
@@ -223,7 +223,7 @@ export const EventForm: React.FC<EventFormProps> = ({ onSubmit, initialData, isL
           <input
             type="url"
             {...register('bannerUrl')}
-            placeholder="https://example.com/banner.jpg"
+            placeholder="https:
             className="neo-input w-full bg-neo-white text-neo-black placeholder-gray-500"
           />
           {errors.bannerUrl && <p className="text-neo-red text-sm mt-2 font-bold">{errors.bannerUrl.message}</p>}

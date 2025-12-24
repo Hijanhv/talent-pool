@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// Event Categories - must match EventCategory type
+
 export const EVENT_CATEGORIES = [
   'conference',
   'workshop',
@@ -19,7 +19,7 @@ export const EVENT_CATEGORIES = [
 export const EVENT_STATUSES = ['draft', 'published', 'ongoing', 'completed', 'cancelled'] as const;
 export const ATTENDEE_STATUSES = ['registered', 'checked-in', 'no-show', 'cancelled'] as const;
 
-// Base Event validation schema
+
 export const createEventSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters').max(255, 'Title must be less than 255 characters'),
   description: z.string().min(10, 'Description must be at least 10 characters').max(5000, 'Description must be less than 5000 characters'),
@@ -63,19 +63,19 @@ export const updateEventSchema = z.object({
   status: z.enum(EVENT_STATUSES).optional(),
 });
 
-// Event registration schema
+
 export const registerEventSchema = z.object({
   eventId: z.string().uuid('Invalid event ID'),
   paymentTxHash: z.string().optional(),
 });
 
-// Check-in schema
+
 export const checkInSchema = z.object({
   eventId: z.string().uuid('Invalid event ID'),
   attendeeWalletAddress: z.string().min(32, 'Invalid wallet address'),
 });
 
-// Infer TypeScript types from schemas
+
 export type CreateEventInput = z.infer<typeof createEventSchema>;
 export type UpdateEventInput = z.infer<typeof updateEventSchema>;
 export type RegisterEventInput = z.infer<typeof registerEventSchema>;

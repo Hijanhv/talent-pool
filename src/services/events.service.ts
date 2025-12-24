@@ -4,7 +4,7 @@ import { events, eventAttendees } from '@/db/schema';
 import { cache, CACHE_KEYS } from '@/lib/redis';
 import type { Event, EventAttendee, CreateEventInput, UpdateEventInput, EventStatus, EventCategory } from '@/types';
 
-const EVENT_DETAIL_CACHE_TTL = 1800; // 30 minutes
+const EVENT_DETAIL_CACHE_TTL = 1800; 
 
 /**
  * Create a new event
@@ -33,7 +33,7 @@ export const createEvent = async (organizerWalletAddress: string, input: CreateE
       status: 'draft',
     } as any);
 
-  // Invalidate list cache
+  
   await cache.clearPattern('events:list:*');
 
   return getEventById(eventId) as Promise<Event>;
@@ -43,7 +43,7 @@ export const createEvent = async (organizerWalletAddress: string, input: CreateE
  * Get event by ID
  */
 export const getEventById = async (eventId: string): Promise<Event | null> => {
-  // Try cache first
+  
   const cached = await cache.get<Event>(CACHE_KEYS.event(eventId));
   if (cached) return cached;
 
@@ -58,7 +58,7 @@ export const getEventById = async (eventId: string): Promise<Event | null> => {
 
   const eventData = event[0] as Event;
 
-  // Cache the result
+  
   await cache.set(CACHE_KEYS.event(eventId), eventData, EVENT_DETAIL_CACHE_TTL);
 
   return eventData;
@@ -79,7 +79,7 @@ export const getEvents = async (
 ): Promise<{ events: Event[]; total: number }> => {
   const offset = (page - 1) * limit;
 
-  // Build where clause
+  
   const whereConditions = [sql`${events.deletedAt} IS NULL`];
 
   if (filters?.status) {
@@ -102,7 +102,7 @@ export const getEvents = async (
 
   const whereClause = and(...whereConditions);
 
-  // Get paginated results
+  
   const results = await db
     .select()
     .from(events)
@@ -112,7 +112,7 @@ export const getEvents = async (
     .offset(offset)
     .execute();
 
-  // Get total count
+  
   const countResult = await db
     .select({ count: sql<number>`cast(count(*) as char)` })
     .from(events)
@@ -156,7 +156,7 @@ export const updateEvent = async (eventId: string, input: UpdateEventInput): Pro
     .where(eq(events.id, eventId))
     .execute();
 
-  // Invalidate caches
+  
   await cache.del(CACHE_KEYS.event(eventId));
   await cache.clearPattern('events:list:*');
 
@@ -173,7 +173,7 @@ export const deleteEvent = async (eventId: string): Promise<boolean> => {
     .where(eq(events.id, eventId))
     .execute();
 
-  // Invalidate caches
+  
   await cache.del(CACHE_KEYS.event(eventId));
   await cache.clearPattern('events:list:*');
 
@@ -201,7 +201,7 @@ export const registerAttendee = async (
     } as any)
     .execute();
 
-  // Update attendee count
+  
   const event = await getEventById(eventId);
   if (event) {
     await db
@@ -213,7 +213,7 @@ export const registerAttendee = async (
       .where(eq(events.id, eventId))
       .execute();
 
-    // Invalidate caches
+    
     await cache.del(CACHE_KEYS.event(eventId));
   }
 
@@ -294,7 +294,7 @@ export const checkInAttendee = async (eventId: string, attendeeWalletAddress: st
     .where(eq(eventAttendees.id, attendee[0].id))
     .execute();
 
-  // Invalidate attendee caches
+  
   await cache.clearPattern(`event:${eventId}:attendees:*`);
 
   return getAttendeeById(attendee[0].id) as Promise<EventAttendee>;

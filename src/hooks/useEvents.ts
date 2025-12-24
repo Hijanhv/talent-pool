@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import type { Event, EventAttendee, CreateEventInput, UpdateEventInput, PaginatedResponse, ApiResponse } from '@/types';
 
-const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 'http:
 
 /**
  * Fetch all events with pagination and filtering
@@ -39,7 +39,7 @@ export const useEvents = (
 
       return response.data.data;
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000, 
   });
 };
 
@@ -92,9 +92,9 @@ export const useCreateEvent = (walletAddress: string | null) => {
       return response.data.data!;
     },
     onSuccess: (data) => {
-      // Invalidate events list
+      
       queryClient.invalidateQueries({ queryKey: ['events'] });
-      // Add to events cache
+      
       queryClient.setQueryData(['event', data.id], data);
     },
   });
@@ -121,7 +121,7 @@ export const useUpdateEvent = (eventId: string, walletAddress: string | null) =>
       return response.data.data!;
     },
     onSuccess: (data) => {
-      // Invalidate related queries
+      
       queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.setQueryData(['event', eventId], data);
     },
@@ -151,7 +151,7 @@ export const useDeleteEvent = (walletAddress: string | null) => {
       return eventId;
     },
     onSuccess: (eventId) => {
-      // Invalidate lists and detail
+      
       queryClient.invalidateQueries({ queryKey: ['events'] });
       queryClient.removeQueries({ queryKey: ['event', eventId] });
     },
@@ -179,7 +179,7 @@ export const useRegisterEvent = (eventId: string, walletAddress: string | null) 
       return response.data.data!;
     },
     onSuccess: () => {
-      // Invalidate event detail and attendees
+      
       queryClient.invalidateQueries({ queryKey: ['event', eventId] });
       queryClient.invalidateQueries({ queryKey: ['eventAttendees', eventId] });
     },
@@ -208,7 +208,7 @@ export const useEventAttendees = (eventId: string, page: number = 1, limit: numb
 
       return response.data.data;
     },
-    staleTime: 2 * 60 * 1000, // 2 minutes
+    staleTime: 2 * 60 * 1000, 
   });
 };
 
@@ -233,7 +233,7 @@ export const useCheckInAttendee = (eventId: string, walletAddress: string | null
       return response.data.data!;
     },
     onSuccess: () => {
-      // Invalidate attendees list
+      
       queryClient.invalidateQueries({ queryKey: ['eventAttendees', eventId] });
     },
   });

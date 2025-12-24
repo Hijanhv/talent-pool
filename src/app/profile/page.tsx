@@ -57,7 +57,7 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Badges Section */}
+        {}
         <div className="mt-12">
           <div className="flex items-center gap-3 mb-6">
             <Award className="w-8 h-8 text-neo-orange" />

@@ -112,7 +112,7 @@ export type PaginatedResponse<T> = {
   };
 };
 
-// Events Management Types
+
 export type EventStatus = 'draft' | 'published' | 'ongoing' | 'completed' | 'cancelled';
 export type EventCategory = 'conference' | 'workshop' | 'webinar' | 'networking' | 'concert' | 'sports' | 'art' | 'tech' | 'business' | 'education' | 'entertainment' | 'other';
 export type AttendeeStatus = 'registered' | 'checked-in' | 'no-show' | 'cancelled';
