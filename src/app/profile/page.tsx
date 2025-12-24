@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 export default function ProfilePage() {
   const { publicKey } = useWallet();
   const router = useRouter();
-  const { data: profile, isLoading } = useProfile(publicKey?.toString());
+  const{data:profile,isLoading} = useProfile(publicKey?.toString() || '');
   const { data: badges, isLoading: badgesLoading } = useBadges(publicKey?.toString() || '');
 
   useEffect(() => {

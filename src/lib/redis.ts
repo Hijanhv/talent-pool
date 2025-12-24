@@ -1,26 +1,46 @@
 import Redis from 'ioredis';
 
+// Only initialize Redis if explicitly enabled
+const REDIS_ENABLED = process.env.REDIS_ENABLED === 'true';
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: parseInt(process.env.REDIS_PORT || '6379', 10),
-  password: process.env.REDIS_PASSWORD,
-  db: parseInt(process.env.REDIS_DB || '0', 10),
-  retryStrategy: (times) => {
-    const delay = Math.min(times * 50, 2000);
-    return delay;
-  },
-  enableReadyCheck: false,
-  enableOfflineQueue: true,
-});
+let redis: Redis | null = null;
 
-redis.on('error', (err) => {
-  console.error('Redis connection error:', err);
-});
+if (REDIS_ENABLED) {
+  redis = new Redis({
+    host: process.env.REDIS_HOST || 'localhost',
+    port: parseInt(process.env.REDIS_PORT || '6379', 10),
+    password: process.env.REDIS_PASSWORD,
+    db: parseInt(process.env.REDIS_DB || '0', 10),
+    retryStrategy: (times) => {
+      // Limit retries to avoid endless connection attempts
+      if (times > 3) {
+        console.warn('Redis connection failed after 3 retries, disabling Redis');
+        return null;
+      }
+      const delay = Math.min(times * 50, 2000);
+      return delay;
+    },
+    enableReadyCheck: false,
+    enableOfflineQueue: false,
+    lazyConnect: true,
+  });
 
-redis.on('connect', () => {
-  console.log('Redis connected');
-});
+  redis.on('error', (err) => {
+    console.warn('Redis connection error (caching disabled):', err.message);
+  });
+
+  redis.on('connect', () => {
+    console.log('Redis connected successfully');
+  });
+
+  // Attempt to connect
+  redis.connect().catch((err) => {
+    console.warn('Redis connection failed, running without cache:', err.message);
+    redis = null;
+  });
+} else {
+  console.info('Redis is disabled. Running without cache.');
+}
 
 export default redis;
 
@@ -39,6 +59,7 @@ export const cache = {
    * Get a value from cache
    */
   get: async <T>(key: string): Promise<T | null> => {
+    if (!redis) return null;
     try {
       const value = await redis.get(key);
       if (!value) return null;
@@ -53,6 +74,7 @@ export const cache = {
    * Set a value in cache with optional expiration
    */
   set: async <T>(key: string, value: T, expirationSeconds: number = 3600): Promise<void> => {
+    if (!redis) return;
     try {
       await redis.setex(key, expirationSeconds, JSON.stringify(value));
     } catch (error) {
@@ -64,6 +86,7 @@ export const cache = {
    * Delete a key from cache
    */
   del: async (key: string | string[]): Promise<void> => {
+    if (!redis) return;
     try {
       if (Array.isArray(key)) {
         await redis.del(...key);
@@ -79,6 +102,7 @@ export const cache = {
    * Clear all cache keys matching a pattern
    */
   clearPattern: async (pattern: string): Promise<void> => {
+    if (!redis) return;
     try {
       const keys = await redis.keys(pattern);
       if (keys.length > 0) {
@@ -93,6 +117,7 @@ export const cache = {
    * Increment a counter
    */
   increment: async (key: string, amount: number = 1): Promise<number> => {
+    if (!redis) return 0;
     try {
       return await redis.incrby(key, amount);
     } catch (error) {
@@ -105,6 +130,7 @@ export const cache = {
    * Decrement a counter
    */
   decrement: async (key: string, amount: number = 1): Promise<number> => {
+    if (!redis) return 0;
     try {
       return await redis.decrby(key, amount);
     } catch (error) {

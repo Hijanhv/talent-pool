@@ -2,6 +2,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useWallet } from '@solana/wallet-adapter-react';
 
+export type Badge = {
+  type: 'event_attendee' | 'event_organizer' | 'early_adopter' | 'super_host' | 'active_participant';
+  name: string;
+  description: string;
+  earnedAt: string;
+  nftMintAddress?: string;
+};
+
 export function useBadges(walletAddress: string) {
   return useQuery({
     queryKey: ['badges', walletAddress],

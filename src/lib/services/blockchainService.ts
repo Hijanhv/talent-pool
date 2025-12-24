@@ -33,7 +33,7 @@ export class BlockchainService {
 
   async getNFTsForWallet(walletAddress: string): Promise<any[]> {
     try {
-      const response = await fetch(`https:
+     const response = await fetch(`https://api.devnet.solana.com/v1/accounts/${walletAddress}/nfts`);
       const data = await response.json();
       return data.nfts || [];
     } catch (error) {

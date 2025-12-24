@@ -3,9 +3,11 @@ import { db } from '@/db/client';
 import { badges } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = request.nextUrl;
     const walletAddress = searchParams.get('walletAddress');
 
     if (!walletAddress) {
