@@ -38,18 +38,18 @@ export default function EventsPage() {
   const statuses = ['draft', 'published', 'ongoing', 'completed', 'cancelled'];
 
   return (
-    <main className="min-h-screen bg-slate-900">
+    <main className="min-h-screen bg-gradient-to-br from-neo-pink via-neo-white to-neo-purple">
       {/* Header */}
-      <section className="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 shadow-lg">
+      <section className="bg-neo-orange border-b-4 border-neo-black sticky top-0 z-40 shadow-brutal-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-white">Events</h1>
-              <p className="text-slate-400 mt-1">Manage and discover events</p>
+              <h1 className="text-4xl font-black text-neo-black uppercase tracking-tight">Events</h1>
+              <p className="text-neo-black mt-2 font-bold">Manage and discover events</p>
             </div>
             <Link
               href="/events/create"
-              className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition-colors"
+              className="neo-btn flex items-center gap-2 bg-neo-purple text-white"
             >
               <Plus size={20} />
               Create Event
@@ -60,7 +60,7 @@ export default function EventsPage() {
           <div className="space-y-4">
             {/* Search Bar */}
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500" size={20} />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" size={20} />
               <input
                 type="text"
                 placeholder="Search events..."
@@ -69,7 +69,7 @@ export default function EventsPage() {
                   setSearchQuery(e.target.value);
                   setPage(1);
                 }}
-                className="w-full pl-12 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="neo-input w-full pl-12 bg-neo-white text-neo-black placeholder-gray-500"
               />
             </div>
 
@@ -77,14 +77,14 @@ export default function EventsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Category Filter */}
               <div>
-                <label className="block text-sm font-semibold text-slate-200 mb-2">Category</label>
+                <label className="block text-sm font-black text-neo-black mb-2 uppercase tracking-wide">Category</label>
                 <select
                   value={selectedCategory}
                   onChange={(e) => {
                     setSelectedCategory(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="neo-input w-full bg-neo-white text-neo-black"
                 >
                   <option value="">All Categories</option>
                   {categories.map((cat) => (
@@ -97,14 +97,14 @@ export default function EventsPage() {
 
               {/* Status Filter */}
               <div>
-                <label className="block text-sm font-semibold text-slate-200 mb-2">Status</label>
+                <label className="block text-sm font-black text-neo-black mb-2 uppercase tracking-wide">Status</label>
                 <select
                   value={selectedStatus}
                   onChange={(e) => {
                     setSelectedStatus(e.target.value);
                     setPage(1);
                   }}
-                  className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="neo-input w-full bg-neo-white text-neo-black"
                 >
                   <option value="">All Statuses</option>
                   {statuses.map((status) => (
@@ -126,14 +126,14 @@ export default function EventsPage() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-              className="w-8 h-8 border-4 border-slate-600 border-t-blue-500 rounded-full"
+              className="w-12 h-12 border-4 border-neo-black border-t-neo-purple"
             />
-            <span className="ml-3 text-slate-400">Loading events...</span>
+            <span className="ml-4 text-neo-black font-black uppercase">Loading events...</span>
           </div>
         ) : error ? (
-          <div className="bg-red-900 border border-red-700 rounded-lg p-6 text-center">
-            <p className="text-red-200 font-semibold">Failed to load events</p>
-            <p className="text-red-400 text-sm mt-1">Please try again later</p>
+          <div className="neo-card bg-neo-red text-white p-6 text-center">
+            <p className="font-black text-xl uppercase">Failed to load events</p>
+            <p className="font-bold text-sm mt-2">Please try again later</p>
           </div>
         ) : data && data.data.length > 0 ? (
           <>

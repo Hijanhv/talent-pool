@@ -9,21 +9,53 @@ html {
 }
 
 body {
-  @apply bg-gray-50;
+  @apply bg-neo-white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
 }
 
 a {
-  @apply transition-colors duration-200;
+  @apply transition-all duration-200;
 }
 
 button:disabled {
-  @apply cursor-not-allowed;
+  @apply cursor-not-allowed opacity-50;
 }
 
 input:disabled,
 textarea:disabled,
 select:disabled {
   @apply cursor-not-allowed bg-gray-100;
+}
+
+/* Neo-Brutalism Components */
+@layer components {
+  .neo-card {
+    @apply border-4 border-neo-black bg-white shadow-brutal transition-all duration-200;
+  }
+  
+  .neo-card:hover {
+    @apply shadow-brutal-lg translate-x-1 translate-y-1;
+  }
+  
+  .neo-btn {
+    @apply border-4 border-neo-black font-bold px-6 py-3 shadow-brutal transition-all duration-200 uppercase tracking-wide;
+  }
+  
+  .neo-btn:hover:not(:disabled) {
+    @apply shadow-brutal-lg translate-x-1 translate-y-1;
+  }
+  
+  .neo-btn:active:not(:disabled) {
+    @apply shadow-none translate-x-1 translate-y-1;
+  }
+  
+  .neo-input {
+    @apply border-4 border-neo-black px-4 py-3 focus:outline-none focus:ring-0 focus:border-neo-pink transition-colors;
+  }
+  
+  .neo-badge {
+    @apply border-3 border-neo-black px-3 py-1 font-bold uppercase text-sm shadow-brutal-sm;
+  }
 }
 
 .animate-pulse {
