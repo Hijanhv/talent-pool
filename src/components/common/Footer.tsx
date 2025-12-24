@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-white font-bold text-lg mb-4">TalentPool</h3>
             <p className="text-sm">Zero-fee freelance marketplace on Solana.</p>
@@ -19,22 +19,16 @@ export function Footer() {
               <li><a href="/events" className="hover:text-white">Events</a></li>
               <li><a href="/gigs/create" className="hover:text-white">Post Gig</a></li>
               <li><a href="/dashboard" className="hover:text-white">Dashboard</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white font-semibold mb-4">Account</h4>
-            <ul className="space-y-2 text-sm">
               <li><a href="/profile" className="hover:text-white">Profile</a></li>
-              <li><a href="/dashboard" className="hover:text-white">My Dashboard</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4">About</h4>
+            <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm">
+              <li><a href="/how-it-works" className="hover:text-white">How It Works</a></li>
+              <li><a href="/faq" className="hover:text-white">FAQ</a></li>
               <li><a href="https://github.com/Hijanhv/talent-pool" target="_blank" rel="noopener noreferrer" className="hover:text-white">Source Code</a></li>
-              <li><span className="text-sm text-gray-400">Built on Solana</span></li>
             </ul>
           </div>
         </div>
