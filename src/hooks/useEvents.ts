@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import type { Event, EventAttendee, CreateEventInput, UpdateEventInput, PaginatedResponse, ApiResponse } from '@/types';
 
-const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 'http:
+const API_BASE = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
 /**
  * Fetch all events with pagination and filtering
