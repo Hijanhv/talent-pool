@@ -1,490 +1,278 @@
-# TalentPool - Zero-Fee Decentralized Freelance Marketplace
+# TalentPool - Decentralized Freelance & Events Platform
 
-A Web3-native freelance marketplace on Solana where students, teenagers, and young adults earn SOL instantly with zero commissions, build blockchain-verified reputation, and trade gigs peer-to-peer.
+A Web3-native platform on Solana combining freelance marketplace (gigs) and event management with NFT tickets, badges, and blockchain-verified reputation. Zero platform fees, instant SOL payments, and decentralized trust-building.
 
-![TalentPool](https://img.shields.io/badge/Solana-devnet-green)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![Solana](https://img.shields.io/badge/Solana-devnet-green)
+![Next.js](https://img.shields.io/badge/Next.js-14.2.35-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ---
 
-## 🚀 Features
+## 🚀 Live Deployment
 
-### For Freelancers (Gig Creators)
-- **Post Unlimited Gigs** - Offer services in 6 categories (Development, Design, Writing, Video, Tutoring, Other)
-- **Instant Payments** - Receive SOL immediately when work is approved, no payment delays
-- **Zero Fees** - Keep 100% of earnings, unlike Fiverr (20-30% cut) or Upwork (5-20% cut)
-- **Global Access** - No banking requirements, just connect Solana wallet
-- **NFT Reputation** - Earn on-chain badges: Top Rated (⭐4.8+), Fast Delivery (50+ orders), Expert (20+ in category), Trusted ($1000+ earned)
-- **Portfolio Showcase** - Display completed work and reviews on public profile
-- **Mobile-First** - Works on any phone with Phantom/Solflare wallet
+**Production URL:** [https://talent-pool-kappa.vercel.app](https://talent-pool-kappa.vercel.app)
 
-### For Buyers (Gig Posters)
-- **Browse Gigs** - Search and filter by category, price, rating, delivery time
-- **Transparent Pricing** - See exact SOL prices, no hidden fees
-- **Direct Hiring** - Choose freelancers, negotiate delivery time
-- **Secure Transactions** - Order status tracking from creation to completion
-- **Leave Reviews** - Rate freelancers and build community trust
+**GitHub Repository:** [https://github.com/Hijanhv/talent-pool](https://github.com/Hijanhv/talent-pool)
 
-### Platform Features
-- **CRUD Operations** - Create, Read, Update, Delete gigs and orders
-- **Pagination** - Efficient browsing of 10,000+ gigs
-- **Real-Time Status** - Track orders: Pending → In Progress → Delivered → Completed
-- **NFT Badges** - Blockchain-verified reputation on Solana
-- **Responsive Design** - Works perfectly on mobile, tablet, desktop
-- **Type-Safe** - Full TypeScript, Zod validation, zero `any` types
+---
+
+## 📋 Project Overview
+
+TalentPool is a comprehensive Web3 platform featuring:
+
+### 1. Freelance Marketplace (Gigs)
+- Post and browse freelance services across multiple categories
+- Direct peer-to-peer hiring with SOL payments
+- Zero platform fees - keep 100% of earnings
+- Order management with complete status tracking
+- Review and rating system for reputation
+
+### 2. Event Management System
+- Create virtual and physical events
+- Ticket sales with SOL payments
+- Attendee registration and check-in
+- **NFT ticket minting** for proof of attendance
+- Capacity management and revenue tracking
+
+### 3. NFT & Achievement System
+- **Event NFT Tickets** - Mint proof-of-attendance certificates
+- **Achievement Badges** - Earn badges for milestones:
+  - event_attendee, event_organizer, early_adopter
+  - super_host, active_participant
+- All NFTs stored as Solana SPL tokens in user wallets
+
+### 4. Multi-Wallet Support
+- Phantom, Solflare, and Solong integration
+- Auto-connect and transaction signing
+- Wallet-based authentication
 
 ---
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Next.js 14** - React SSR framework for server/client components
-- **TypeScript** - Static type checking
-- **Tailwind CSS** - Utility-first styling
-- **Framer Motion** - Smooth animations and transitions
-- **React Query (TanStack)** - Server state management, caching, mutations
-- **Solana Wallet Adapter** - Connect Phantom, Solflare, Solong wallets
-- **Lucide Icons** - Beautiful SVG icons
-- **React Hook Form** - Form validation with minimal re-renders
+- **Next.js 14.2.35** - React App Router with Server/Client Components
+- **TypeScript 5.0** - Full type safety with strict mode
+- **Tailwind CSS** - Custom neo-brutalism design system
+- **Framer Motion** - Smooth animations
+- **React Query** - Server state management and caching
+- **Solana Wallet Adapter** - Multi-wallet support
 
 ### Backend
-- **Next.js API Routes** - Serverless functions for CRUD
-- **TypeScript** - Type-safe backend code
-- **Drizzle ORM** - Lightweight, type-safe database layer
-- **Zod** - Runtime validation for API inputs
-- **MySQL** - Relational database (PlanetScale recommended)
+- **Next.js API Routes** - Serverless REST APIs
+- **Drizzle ORM 0.28.1** - Type-safe PostgreSQL queries
+- **PostgreSQL (Neon)** - Cloud database with connection pooling
+- **Zod** - Runtime validation
 
 ### Blockchain
-- **Solana Web3.js** - Interact with Solana RPC
-- **Metaplex** - NFT minting and metadata management
-- **Solana Devnet** - Test network (free SOL faucet)
+- **Solana Web3.js** - Blockchain interactions
+- **@solana/spl-token** - NFT minting
+- **Solana Devnet** - Test network
 
 ### Infrastructure
-- **Vercel** - Deploy Next.js + edge functions + serverless
-- **PlanetScale** - MySQL database with instant scaling
-- **Solana RPC** - Community node or Helius/QuickNode
+- **Vercel** - Deployment platform
+- **Neon PostgreSQL** - Serverless database
+- **Solana RPC** - Devnet endpoint
 
 ---
 
-## 📋 How It Works
-
-### User Journey
-
-#### Freelancer Workflow
-```
-1. Connect Wallet (Phantom/Solflare)
-   ↓
-2. Create Profile (name, bio, skills)
-   ↓
-3. Post Gig (title, description, price in SOL, delivery time)
-   ↓
-4. Receive Orders (buyers request to hire for gig)
-   ↓
-5. Complete Work (deliver files/link after buyer pays)
-   ↓
-6. Get Paid (SOL transferred instantly to wallet)
-   ↓
-7. Earn Badges (system auto-mints NFTs for achievements)
-   ↓
-8. Build Reputation (reviews + badges = trust score)
-```
-
-#### Buyer Workflow
-```
-1. Connect Wallet (Phantom/Solflare)
-   ↓
-2. Browse Gigs (search by category, price, rating)
-   ↓
-3. View Details (see freelancer profile, reviews, badge)
-   ↓
-4. Create Order (set delivery deadline, approve price)
-   ↓
-5. Payment (SOL transferred from wallet to smart contract escrow)
-   ↓
-6. Receive Work (freelancer delivers, you approve quality)
-   ↓
-7. Release Funds (payment transferred to freelancer)
-   ↓
-8. Leave Review (rate experience, support freelancer)
-```
-
-### Payment Flow
-
-```
-Buyer Wallet
-    ↓
-[Create Order]
-    ↓
-[Pay Order] → Solana Transfer (via Web3.js)
-    ↓
-Seller Wallet (receives SOL immediately)
-    ↓
-[Database Records Transaction Hash]
-    ↓
-Order marked "in_progress"
-    ↓
-[Seller Delivers Work]
-    ↓
-[Buyer Reviews & Approves]
-    ↓
-Order marked "completed"
-    ↓
-Freelancer keeps 100% of SOL earned
-```
-
----
-
-## 🚀 Getting Started
+## 🚀 Setup Instructions
 
 ### Prerequisites
-
-- **Node.js** 18+ ([Download](https://nodejs.org))
-- **npm** or **yarn**
-- **Phantom Wallet** ([Install](https://phantom.app)) or Solflare
-- **PlanetScale Account** ([Sign up](https://planetscale.com)) - Free tier available
-- **Helius API Key** ([Get](https://helius.xyz)) - Optional for NFT fetching
+- Node.js 18+
+- PostgreSQL database (Neon recommended)
+- Git
+- Solana wallet (Phantom browser extension)
 
 ### 1. Clone Repository
-
 ```bash
-git clone https://github.com/yourusername/talent-pool.git
+git clone https://github.com/Hijanhv/talent-pool.git
 cd talent-pool
 ```
 
 ### 2. Install Dependencies
-
 ```bash
 npm install
 ```
 
-### 3. Setup Environment Variables
+### 3. Configure Environment Variables
 
-```bash
-cp .env.example .env.local
-```
-
-Fill in `.env.local`:
+Create `.env.local`:
 
 ```env
-DATABASE_URL="mysql://root:password@host/talent_pool"
+# Database
+DATABASE_URL="postgresql://user:password@host/database?sslmode=require"
 
+# Solana
 SOLANA_RPC_URL="https://api.devnet.solana.com"
 NEXT_PUBLIC_SOLANA_RPC_URL="https://api.devnet.solana.com"
 NEXT_PUBLIC_SOLANA_NETWORK="devnet"
 
+# App
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
-
-HELIUS_API_KEY="your_helius_api_key"
 ```
 
-### 4. Setup Database
-
-**Using PlanetScale:**
+### 4. Database Setup
 ```bash
-npm run db:generate
-npm run db:push
-```
-
-**Or local MySQL:**
-```bash
-mysql -u root -p
-CREATE DATABASE talent_pool;
-
-npm run db:generate
 npm run db:push
 ```
 
 ### 5. Run Development Server
-
 ```bash
 npm run dev
 ```
 
-Visit `http://localhost:3000`
+Visit http://localhost:3000
 
 ---
 
-## 📱 Pages & Routes
+## 🌐 Environment Variables
 
-### Public Pages
-- `/` - Marketplace (browse all gigs)
-- `/gigs/:id` - Gig detail page
+### Required
 
-### Authenticated Pages (Requires Wallet)
-- `/gigs/create` - Create new gig
-- `/gigs/:id/edit` - Edit your gig
-- `/orders` - My orders (buying + selling)
-- `/orders/:id` - Order detail & tracking
-- `/profile/:walletAddress` - Public profile & portfolio
-- `/profile/settings` - Edit your profile
-
-### API Endpoints
-
-**Gigs**
-- `GET /api/gigs` - List gigs (paginated, filterable)
-- `POST /api/gigs` - Create gig
-- `GET /api/gigs/:id` - Get gig details
-- `PUT /api/gigs/:id` - Update gig
-- `DELETE /api/gigs/:id` - Delete gig (soft delete)
-- `GET /api/gigs/:id/reviews` - Get gig reviews
-
-**Orders**
-- `POST /api/orders` - Create order
-- `GET /api/orders/:id` - Get order details
-- `POST /api/orders/:id/pay` - Record payment (SOL transfer)
-- `POST /api/orders/:id/deliver` - Mark work as delivered
-- `POST /api/orders/:id/complete` - Approve & complete order
-- `POST /api/orders/:id/review` - Leave review
-
-**Users**
-- `GET /api/users/:address/profile` - Get user profile
-- `PUT /api/users/:address/profile` - Update profile
-- `GET /api/users/:address/gigs` - Get user's gigs
-- `GET /api/users/:address/orders/buying` - Get buy orders
-- `GET /api/users/:address/orders/selling` - Get sell orders
-- `GET /api/users/:address/badges` - Get earned badges
-- `POST /api/users/:address/badges/mint` - Mint reputation NFT
-- `GET /api/users/:address/reviews` - Get reviews about user
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@host/db` |
+| `NEXT_PUBLIC_SOLANA_RPC_URL` | Solana RPC (client) | `https://api.devnet.solana.com` |
+| `SOLANA_RPC_URL` | Solana RPC (server) | `https://api.devnet.solana.com` |
+| `NEXT_PUBLIC_SOLANA_NETWORK` | Network type | `devnet` |
+| `NEXT_PUBLIC_APP_URL` | Deployed URL | `https://your-app.vercel.app` |
 
 ---
 
-## 💻 Project Structure
+## 🚢 Deployment to Vercel
+
+1. Push to GitHub
+```bash
+git push origin main
+```
+
+2. Import to Vercel
+- Go to vercel.com
+- Import your GitHub repository
+- Vercel auto-detects Next.js
+
+3. Add Environment Variables
+- Add all variables from `.env.local`
+- Use **pooled connection** for DATABASE_URL
+
+4. Deploy
+- Click Deploy
+- Wait 2-3 minutes
+- Your app is live!
+
+---
+
+## 📁 Project Structure
 
 ```
 talent-pool/
 ├── src/
-│   ├── app/                      # Next.js pages and API routes
-│   │   ├── api/                  # REST API endpoints
-│   │   │   ├── gigs/
-│   │   │   ├── orders/
-│   │   │   └── users/
-│   │   ├── gigs/                 # Pages: marketplace, detail, create
-│   │   ├── orders/               # Pages: dashboard, order detail
-│   │   ├── profile/              # Pages: public, settings
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   ├── globals.css
-│   │   └── providers.tsx
-│   ├── components/               # React components
-│   │   ├── GigCard.tsx
-│   │   ├── GigForm.tsx
-│   │   ├── OrderCard.tsx
-│   │   ├── ProfileCard.tsx
-│   │   ├── WalletConnect.tsx
-│   │   └── common/
-│   │       ├── Header.tsx
-│   │       └── Footer.tsx
-│   ├── db/                       # Database layer
-│   │   ├── schema.ts             # Drizzle ORM tables
-│   │   └── client.ts             # DB connection
-│   ├── hooks/                    # Custom React hooks
-│   │   ├── useGigs.ts
-│   │   ├── useOrders.ts
-│   │   ├── useReviews.ts
-│   │   ├── useProfile.ts
-│   │   └── useBadges.ts
-│   ├── lib/                      # Utilities and services
-│   │   ├── services/
-│   │   │   ├── gigService.ts
-│   │   │   ├── orderService.ts
-│   │   │   ├── reviewService.ts
-│   │   │   └── blockchainService.ts
-│   │   ├── validators.ts         # Zod schemas
-│   │   ├── blockchain.ts         # Web3.js utilities
-│   │   └── utils.ts
-│   └── types/
-│       └── index.ts
-├── public/                       # Static assets
-├── .env.example                  # Environment variables template
-├── .env.local                    # Local environment (git ignored)
-├── tsconfig.json
-├── tailwind.config.ts
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API Routes
+│   │   │   ├── events/        # Events CRUD
+│   │   │   ├── gigs/          # Gigs CRUD
+│   │   │   └── badges/        # Badges API
+│   │   ├── events/            # Events pages
+│   │   ├── gigs/              # Marketplace pages
+│   │   ├── profile/           # User profile
+│   │   ├── dashboard/         # User dashboard
+│   │   └── providers.tsx      # React Query + Wallet
+│   ├── components/            # React components
+│   ├── hooks/                 # Custom hooks
+│   ├── lib/                   # Utilities
+│   │   └── solana/
+│   │       └── nft-service.ts # NFT minting
+│   ├── db/                    # Database
+│   │   ├── client.ts
+│   │   └── schema.ts          # Tables + relations
+│   └── types/                 # TypeScript types
+├── drizzle/                   # Migrations
 ├── drizzle.config.ts
-├── next.config.js
-├── postcss.config.js
-├── package.json
-└── README.md
+├── tailwind.config.ts
+└── package.json
 ```
 
 ---
 
-## 🔐 Security & Best Practices
+## 💡 Assumptions & Notes
 
-### Input Validation
-- All API inputs validated with Zod schemas
-- Type-safe requests and responses
-- Prevents injection attacks
+### Architecture Decisions
 
-### Authentication
-- Wallet signature verification via header
-- X-Wallet-Address header required for mutations
-- Only creator can update/delete own content
+1. **Next.js App Router** - Better performance with Server Components
+2. **PostgreSQL** - Switched from MySQL (PlanetScale removed free tier)
+3. **Drizzle ORM** - Lightweight and type-safe
+4. **Neo-Brutalism Design** - Bold, youth-friendly aesthetic
+5. **Devnet** - Safe testing with free SOL
 
-### Database
-- Parameterized queries via Drizzle ORM
-- No raw SQL strings
-- SQL injection protection
+### Assumptions
 
-### Code Quality
-- Full TypeScript, no `any` types
-- Reusable services for business logic
-- Component composition for DRY UI
-- Proper error handling in all routes
+1. **Wallet-Based Auth** - No email/password required
+2. **Direct Payments** - No escrow in MVP (future enhancement)
+3. **Optional NFT Minting** - Users opt-in for event tickets
+4. **Soft Deletes** - Preserves order history
+5. **12 Items Per Page** - Pagination default
 
----
+### Future Enhancements
 
-## 🏆 NFT Badge System
-
-Auto-mint achievement badges when freelancers meet criteria:
-
-### Badge Types
-- **Top Rated** - Average rating ≥ 4.8 stars
-- **Fast Delivery** - 50+ orders completed on-time
-- **Expert [Category]** - 20+ gigs completed in a category
-- **Trusted Freelancer** - Total earnings ≥ $1000 (≈7 SOL)
-
-### Badge Metadata (On-Chain)
-```json
-{
-  "name": "Top Rated Badge",
-  "description": "Earned for maintaining 4.8+ star rating",
-  "image": "ipfs://...",
-  "attributes": [
-    {
-      "trait_type": "Badge Type",
-      "value": "top_rated"
-    }
-  ]
-}
-```
+- Smart contract escrow for payments
+- Real-time notifications
+- Mobile app (React Native)
+- Mainnet deployment
+- Multi-language support
+- DAO governance
 
 ---
 
-## 🚀 Deployment
+## 🎯 Key Features
 
-### Deploy to Vercel
-
-**Step 1: Push to GitHub**
-```bash
-git add .
-git commit -m "Initial TalentPool deployment"
-git push origin main
-```
-
-**Step 2: Create Vercel Project**
-- Go to [vercel.com](https://vercel.com)
-- Click "New Project"
-- Select your GitHub repository
-- Click "Import"
-
-**Step 3: Set Environment Variables**
-In Vercel dashboard → Settings → Environment Variables:
-```
-DATABASE_URL = mysql://...
-SOLANA_RPC_URL = https://api.devnet.solana.com
-NEXT_PUBLIC_SOLANA_RPC_URL = https://api.devnet.solana.com
-NEXT_PUBLIC_SOLANA_NETWORK = devnet
-NEXT_PUBLIC_APP_URL = https://your-domain.vercel.app
-HELIUS_API_KEY = (optional)
-```
-
-**Step 4: Deploy**
-```bash
-vercel --prod
-```
-
-### Deploy Database to PlanetScale
-
-- Sign up at [planetscale.com](https://planetscale.com)
-- Create database
-- Copy connection string to Vercel environment
-- Run: `npm run db:push`
+✅ Complete CRUD for Gigs, Events, Orders, Profiles  
+✅ Solana wallet integration (Phantom, Solflare, Solong)  
+✅ NFT ticket minting for events  
+✅ Badge/achievement system  
+✅ Neo-brutalism responsive design  
+✅ Search, filter, pagination  
+✅ Type-safe with TypeScript + Zod  
 
 ---
 
-## 📊 Database Schema
+## 📚 API Documentation
 
-**Gigs Table**
+### Events
 ```
-- id, creator_wallet_address, title, description
-- category, price_in_sol, delivery_days_max
-- image_url, status (active/paused/archived)
-- average_rating, total_reviews, total_completed_orders
-```
+GET    /api/events              # List with pagination
+POST   /api/events              # Create event
+GET    /api/events/[id]         # Get details
+PUT    /api/events/[id]         # Update
+DELETE /api/events/[id]         # Soft delete
 
-**Orders Table**
-```
-- id, gig_id, buyer_address, seller_address
-- price_agreed, status (pending/in_progress/delivered/completed)
-- payment_tx_hash, delivery_deadline
-- created_at, delivered_at, completed_at
+POST   /api/events/[id]/attendees      # Register
+POST   /api/events/[id]/mint-nft       # Mint NFT
 ```
 
-**Reviews Table**
+### Gigs
 ```
-- id, order_id, reviewer_address
-- rating (1-5), comment
-- nft_badge_address (optional)
-```
-
-**User Profiles Table**
-```
-- wallet_address, display_name, bio
-- profile_image_url, category
-- total_earned, total_orders, average_rating
+GET    /api/gigs                # List with pagination
+POST   /api/gigs                # Create gig
+GET    /api/gigs/[id]           # Get details
+PUT    /api/gigs/[id]           # Update
+DELETE /api/gigs/[id]           # Delete
 ```
 
 ---
 
-## 💰 Pricing Model
+## 📝 License
 
-### For Freelancers
-- **Commission: 0%**
-- **Payment: Instant** (no 5-7 day wait)
-- **Fees: None** (only Solana network costs ~$0.00025)
-
-### Comparison
-| Feature | TalentPool | Fiverr | Upwork |
-|---------|-----------|--------|--------|
-| Commission | 0% | 20-30% | 5-20% |
-| Payment Speed | Instant | 5-7 days | 7-14 days |
-| Platform Fee | None | Yes | Yes |
-| Global Access | Yes | ID required | Bank required |
-| Wallet Support | Solana | None | None |
+MIT License
 
 ---
 
-## 📚 Resources
+## 👨‍💻 Developer
 
-- [Solana Docs](https://docs.solana.com)
-- [Next.js 14](https://nextjs.org/docs)
-- [React Query](https://tanstack.com/query/latest)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Drizzle ORM](https://orm.drizzle.team)
-- [PlanetScale](https://planetscale.com/docs)
+**Repository:** [github.com/Hijanhv/talent-pool](https://github.com/Hijanhv/talent-pool)  
+**Live Demo:** [talent-pool-kappa.vercel.app](https://talent-pool-kappa.vercel.app)
 
 ---
 
-## 📜 License
-
-MIT License - see LICENSE file for details
-
----
-
-## 🙏 Acknowledgments
-
-- Built on [Solana](https://solana.com)
-- Deployed via [Vercel](https://vercel.com)
-- Inspired by [Fiverr](https://fiverr.com) and [Upwork](https://upwork.com)
-
----
-
-## 📧 Support
-
-- **Email:** support@talentpool.app
-- **GitHub Issues:** [Report Bug](https://github.com/talentpool/issues)
-
----
-
-**Made with ❤️ for the Solana community**
+**Built with ❤️ for the Web3 community**
