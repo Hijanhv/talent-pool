@@ -34,10 +34,14 @@ export function Providers({ children }: { children: ReactNode }) {
     []
   );
 
+  const onError = (error: any) => {
+    console.error('Wallet error:', error);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect={true}>
+        <WalletProvider wallets={wallets} autoConnect={true} onError={onError}>
           <WalletModalProvider>
             <div className="flex flex-col min-h-screen">
               <Header />
