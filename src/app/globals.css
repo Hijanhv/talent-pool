@@ -54,7 +54,7 @@ select:disabled {
   }
   
   .neo-badge {
-    @apply border-3 border-neo-black px-3 py-1 font-bold uppercase text-sm shadow-brutal-sm;
+    @apply border-2 border-neo-black px-3 py-1 font-bold uppercase text-sm shadow-brutal-sm;
   }
 }
 

@@ -19,18 +19,18 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/" className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-3 border-neo-black transition-all">
+            <Link href="/" className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
               Marketplace
             </Link>
             {publicKey && (
               <>
-                <Link href="/gigs/create" className="text-neo-black hover:bg-neo-orange hover:text-white font-bold px-4 py-2 border-3 border-neo-black transition-all">
+                <Link href="/gigs/create" className="text-neo-black hover:bg-neo-orange hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
                   Post Gig
                 </Link>
-                <Link href="/orders" className="text-neo-black hover:bg-neo-red hover:text-white font-bold px-4 py-2 border-3 border-neo-black transition-all">
+                <Link href="/orders" className="text-neo-black hover:bg-neo-red hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
                   Dashboard
                 </Link>
-                <Link href={`/profile/${publicKey.toString()}`} className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-3 border-neo-black transition-all">
+                <Link href={`/profile/${publicKey.toString()}`} className="text-neo-black hover:bg-neo-purple hover:text-white font-bold px-4 py-2 border-2 border-neo-black transition-all">
                   Profile
                 </Link>
               </>
@@ -41,7 +41,7 @@ export function Header() {
             <WalletConnect />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-neo-black hover:text-white border-3 border-neo-black transition-all"
+              className="md:hidden p-2 hover:bg-neo-black hover:text-white border-2 border-neo-black transition-all"
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -50,16 +50,16 @@ export function Header() {
 
         {mobileMenuOpen && publicKey && (
           <nav className="md:hidden mt-4 space-y-2 pb-4">
-            <Link href="/" className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-3 border-neo-black">
+            <Link href="/" className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-2 border-neo-black">
               Marketplace
             </Link>
-            <Link href="/gigs/create" className="block py-2 px-4 text-neo-black hover:bg-neo-orange hover:text-white font-bold border-3 border-neo-black">
+            <Link href="/gigs/create" className="block py-2 px-4 text-neo-black hover:bg-neo-orange hover:text-white font-bold border-2 border-neo-black">
               Post Gig
             </Link>
-            <Link href="/orders" className="block py-2 px-4 text-neo-black hover:bg-neo-red hover:text-white font-bold border-3 border-neo-black">
+            <Link href="/orders" className="block py-2 px-4 text-neo-black hover:bg-neo-red hover:text-white font-bold border-2 border-neo-black">
               Dashboard
             </Link>
-            <Link href={`/profile/${publicKey.toString()}`} className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-3 border-neo-black">
+            <Link href={`/profile/${publicKey.toString()}`} className="block py-2 px-4 text-neo-black hover:bg-neo-purple hover:text-white font-bold border-2 border-neo-black">
               Profile
             </Link>
           </nav>

@@ -122,7 +122,7 @@ export const EventForm: React.FC<EventFormProps> = ({ onSubmit, initialData, isL
           <input
             type="checkbox"
             {...register('isVirtual')}
-            className="w-5 h-5 border-3 border-neo-black text-neo-purple focus:ring-0 focus:ring-offset-0"
+            className="w-5 h-5 border-2 border-neo-black text-neo-purple focus:ring-0 focus:ring-offset-0"
           />
           <span className="text-sm font-black text-neo-black uppercase tracking-wide">Virtual Event</span>
         </label>
@@ -236,7 +236,7 @@ export const EventForm: React.FC<EventFormProps> = ({ onSubmit, initialData, isL
             <input
               type="checkbox"
               {...register('canMintNFT')}
-              className="w-5 h-5 border-3 border-neo-black text-neo-purple focus:ring-0 focus:ring-offset-0"
+              className="w-5 h-5 border-2 border-neo-black text-neo-purple focus:ring-0 focus:ring-offset-0"
             />
             <span className="text-sm font-black text-neo-black uppercase tracking-wide">Enable NFT Tickets</span>
           </label>

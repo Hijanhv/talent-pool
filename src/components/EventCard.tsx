@@ -95,7 +95,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event }) => {
           </div>
 
           <div className="mb-4">
-            <div className="w-full bg-neo-gray border-3 border-neo-black h-4 overflow-hidden">
+            <div className="w-full bg-neo-gray border-2 border-neo-black h-4 overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${capacityPercentage}%` }}
