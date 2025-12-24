@@ -266,13 +266,7 @@ DELETE /api/gigs/[id]           # Delete
 
 MIT License
 
----
 
-## 👨‍💻 Developer
 
-**Repository:** [github.com/Hijanhv/talent-pool](https://github.com/Hijanhv/talent-pool)  
-**Live Demo:** [talent-pool-kappa.vercel.app](https://talent-pool-kappa.vercel.app)
 
----
 
-**Built with ❤️ for the Web3 community**
